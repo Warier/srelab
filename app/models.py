@@ -14,8 +14,8 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String(64))
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
-    events: Mapped[list["Event"]] = relationship(back_populates="creator")
-    orders: Mapped[list["Order"]] = relationship(back_populates="buyer")
+    events: Mapped[list[Event]] = relationship(back_populates="creator")
+    orders: Mapped[list[Order]] = relationship(back_populates="buyer")
 
 
 class Event(Base):
@@ -32,7 +32,7 @@ class Event(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
     creator: Mapped[User] = relationship(back_populates="events")
-    orders: Mapped[list["Order"]] = relationship(back_populates="event")
+    orders: Mapped[list[Order]] = relationship(back_populates="event")
 
 
 class Order(Base):

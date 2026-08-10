@@ -2,63 +2,39 @@
 
 ## Estado
 
-`pending`
+`verified`
 
 ## Ambiente
 
-- Python:
-- uv:
-- Ruff:
-- Sistema operacional:
+- Python 3.14.3
+- uv 0.9.30
+- Ruff 0.16.2
+- Ubuntu 24.04 no WSL2
 
 ## Baseline
 
-### `ruff check .`
+- `ruff check .`: 16 ocorrências — `E501` (8), `F401` (1), `I001` (2),
+  `UP037` (3) e `UP043` (2).
+- `ruff format --check .`: 4 arquivos precisavam de formatação.
 
-Pendente: comando, quantidade total e códigos encontrados.
-
-### `ruff format --check .`
-
-Pendente: comando e quantidade de arquivos que precisavam de formatação.
-
-## Classificação das correções
-
-### Automáticas e seguras
-
-Pendente.
-
-### Manuais
-
-Pendente.
-
-### Possíveis mudanças de comportamento rejeitadas
-
-Pendente.
-
-## Exceções
-
-Nenhuma esperada. Se houver, registre regra, arquivo, linha, motivo e alternativa
-rejeitada.
+As correções organizaram imports, removeram um import não usado, modernizaram
+anotações para Python 3.14 e formataram linhas longas. Três comentários longos em
+`tests/conftest.py` foram quebrados manualmente durante a auditoria. Não foram
+usados fixes inseguros, ignores ou `# noqa`.
 
 ## Prova final
 
-### Lockfile
+```text
+uv lock --check                              -> código 0
+uv run --group lint ruff check .             -> All checks passed!
+uv run --group lint ruff format --check .    -> 25 files already formatted
+uv run pytest -q --capture=sys               -> 3 passed, 1 warning in 0.92s
+```
 
-Pendente: saída de `uv lock --check`.
+O warning já conhecido é emitido pela integração Starlette TestClient/HTTPX e não
+foi criado pelas mudanças do Ruff.
 
-### Linter
+## Revisão
 
-Pendente: saída de `uv run --group lint ruff check .`.
-
-### Formato
-
-Pendente: saída de `uv run --group lint ruff format --check .`.
-
-### Regressão
-
-Pendente: saída de `uv run pytest -q`.
-
-## Revisão do diff
-
-Pendente: confirme que não houve mudança intencional de comportamento nem de
-assertions.
+O diff contém apenas configuração, lockfile e transformações mecânicas de estilo.
+Não houve mudança de regra de negócio nem das assertions dos testes.

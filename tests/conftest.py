@@ -1,17 +1,18 @@
 from collections.abc import Generator
 from pathlib import Path
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
-from app.database import Base, get_db
 import app.database as db_module
+from app.database import get_db
 from app.main import app
 
 
 @pytest.fixture
-def client(tmp_path: Path) -> Generator[TestClient, None, None]:
+def client(tmp_path: Path) -> Generator[TestClient]:
     """Cria um TestClient com um banco SQLite temporario exclusivo por teste.
 
     Garante que o lifespan crie as tabelas no banco de teste e limpa os overrides.
@@ -26,13 +27,13 @@ def client(tmp_path: Path) -> Generator[TestClient, None, None]:
         bind=test_engine, autoflush=False, expire_on_commit=False
     )
 
-    # 3. Redireciona o engine global do modulo app.database para usar nosso engine de teste.
-    #    Isso garante que quando o lifespan chamar create_tables(), as tabelas serao criadas no test.db!
+    # 3. Redireciona o engine global do modulo app.database para usar o engine
+    #    de teste. Assim, create_tables() cria as tabelas no banco temporario.
     original_engine = db_module.engine
     db_module.engine = test_engine
 
     # 4. Define a funcao substituta para a dependencia get_db
-    def override_get_db() -> Generator[Session, None, None]:
+    def override_get_db() -> Generator[Session]:
         db = TestingSessionLocal()
         try:
             yield db
@@ -42,7 +43,7 @@ def client(tmp_path: Path) -> Generator[TestClient, None, None]:
     # 5. Aplica o override na aplicacao FastAPI
     app.dependency_overrides[get_db] = override_get_db
 
-    # 6. Instancia o client dentro de um context manager para executar o lifespan (gerando as tabelas)
+    # 6. Executa o lifespan usando o TestClient como context manager
     with TestClient(app, follow_redirects=False) as test_client:
         yield test_client
 
