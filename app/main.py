@@ -1,7 +1,7 @@
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import datetime
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, Form, Request, status
@@ -33,13 +33,17 @@ templates = Jinja2Templates(directory="app/templates")
 
 
 def format_money(value: int) -> str:
-    return f"R$ {value / 100:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    return (
+        f"R$ {value / 100:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    )
 
 
 templates.env.filters["money"] = format_money
 
 
-def page_context(request: Request, database: Session, **extra: object) -> dict[str, object]:
+def page_context(
+    request: Request, database: Session, **extra: object
+) -> dict[str, object]:
     return {
         "request": request,
         "current_user": current_user(request, database),
@@ -48,7 +52,9 @@ def page_context(request: Request, database: Session, **extra: object) -> dict[s
 
 
 @app.get("/", response_class=HTMLResponse)
-def home(request: Request, database: Annotated[Session, Depends(get_db)]) -> HTMLResponse:
+def home(
+    request: Request, database: Annotated[Session, Depends(get_db)]
+) -> HTMLResponse:
     events = database.scalars(select(Event).order_by(Event.event_date)).all()
     return templates.TemplateResponse(
         request=request,
@@ -90,7 +96,9 @@ def register(
         return templates.TemplateResponse(
             request=request,
             name="register.html",
-            context=page_context(request, database, error=error, email=normalized_email),
+            context=page_context(
+                request, database, error=error, email=normalized_email
+            ),
             status_code=status.HTTP_400_BAD_REQUEST,
         )
 
@@ -187,7 +195,7 @@ def create_event(
             raise ValueError
         if price_cents < 0 or available_tickets < 1:
             raise ValueError
-    except (InvalidOperation, ValueError):
+    except InvalidOperation, ValueError:
         return templates.TemplateResponse(
             request=request,
             name="new_event.html",
@@ -309,7 +317,9 @@ def orders(
 
 
 @app.get("/api/events")
-def list_events(database: Annotated[Session, Depends(get_db)]) -> list[dict[str, object]]:
+def list_events(
+    database: Annotated[Session, Depends(get_db)],
+) -> list[dict[str, object]]:
     events = database.scalars(select(Event).order_by(Event.event_date)).all()
     return [
         {

@@ -2,7 +2,7 @@
 
 ## Estado
 
-`active`
+`solved`
 
 ## Resultado único esperado
 
@@ -214,4 +214,4 @@ comportamento. Se essa explicação não existir, o ignore apenas esconde a evid
 - Tag inicial: `challenge/002/start`.
 - Branch: `challenge/002-ruff-quality-gate`.
 - Tag futura da solução: `challenge/002/solved`.
-- Solução oficial: [solution.md](solution.md), ainda `pending`.
+- Solução oficial: [solution.md](solution.md).
