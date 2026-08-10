@@ -13,8 +13,8 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `quality-001`, descrito em
-  `docs/studies/challenges/002-ruff-quality-gate/README.md`.
+- Desafio ativo: `typing-001`, descrito em
+  `docs/studies/challenges/003-static-typing/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
@@ -102,11 +102,13 @@ Verificações atualmente incorporadas ao projeto:
 ```bash
 uv sync --locked
 uv run pytest -q
+uv run --group lint ruff check .
+uv run --group lint ruff format --check .
 uv run uvicorn app.main:app --reload
 ```
 
-Ruff está sendo introduzido no desafio ativo. Mypy, cobertura e CI só entram
-quando seus desafios específicos forem concluídos.
+Ruff foi incorporado. Mypy está sendo introduzido no desafio ativo; cobertura e
+CI só entram em seus desafios específicos.
 
 ## Política de documentação
 

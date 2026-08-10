@@ -2,7 +2,7 @@
   "schema_version": 2,
   "updated_at": "2026-08-09",
   "current_stage": "baseline-v0",
-  "active_challenge": "quality-001",
+  "active_challenge": "typing-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -10,7 +10,6 @@
   },
   "concepts": {
     "to_cover": [
-      "lint e formatação automatizados",
       "análise estática de tipos",
       "cobertura orientada a risco",
       "integração e entrega contínuas",
@@ -35,13 +34,13 @@
       "sessão por cookie",
       "armazenamento monetário em centavos",
       "configuração simples por variáveis de ambiente",
-      "isolamento de testes de integração"
+      "isolamento de testes de integração",
+      "lint e formatação automatizados"
     ],
     "well_covered": []
   },
   "tools": {
     "to_cover": [
-      "Ruff",
       "Mypy",
       "pytest-cov",
       "GitHub Actions",
@@ -78,17 +77,12 @@
       "SQLite",
       "Jinja2",
       "pytest",
-      "HTTPX TestClient"
+      "HTTPX TestClient",
+      "Ruff"
     ],
     "well_covered": []
   },
   "next_challenges": [
-    {
-      "id": "quality-001",
-      "objective": "Aplicar lint e formato consistentes.",
-      "tool": "Ruff",
-      "proof": "ruff check . e ruff format --check . retornam zero."
-    },
     {
       "id": "typing-001",
       "objective": "Verificar estaticamente o código da aplicação.",
