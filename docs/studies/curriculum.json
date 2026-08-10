@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-09",
+  "current_stage": "baseline-v0",
+  "active_challenge": "foundation-001",
+  "status_meaning": {
+    "to_cover": "Ainda não estudado de forma prática no projeto.",
+    "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
+    "well_covered": "Aplicado, medido e discutido profissionalmente em múltiplos cenários; não exige mais um desafio geral exclusivo."
+  },
+  "concepts": {
+    "to_cover": [
+      "estratégia de testes e pirâmide de testes",
+      "qualidade automatizada e CI/CD",
+      "observabilidade, SLI, SLO e error budget",
+      "testes de carga e planejamento de capacidade",
+      "concorrência, transações e isolamento",
+      "otimização de consultas e modelagem de banco",
+      "pool de conexões e backpressure",
+      "cache, invalidação e cache stampede",
+      "mensageria, retries e dead-letter queues",
+      "idempotência, outbox e consistência eventual",
+      "escala horizontal e balanceamento",
+      "segurança de aplicação e supply chain",
+      "resiliência e chaos engineering",
+      "DDD pragmático e monólito modular",
+      "CDC, eventos e decomposição em serviços",
+      "infraestrutura como código e disaster recovery"
+    ],
+    "introduced": [
+      "aplicação web monolítica renderizada no servidor",
+      "mapeamento objeto-relacional básico",
+      "sessão por cookie",
+      "armazenamento monetário em centavos",
+      "configuração simples por variáveis de ambiente"
+    ],
+    "well_covered": []
+  },
+  "tools": {
+    "to_cover": [
+      "pytest",
+      "Ruff",
+      "Mypy ou Pyright",
+      "GitHub Actions",
+      "SonarQube",
+      "Docker ou Podman",
+      "Locust",
+      "Prometheus",
+      "Grafana",
+      "Loki",
+      "OpenTelemetry",
+      "Tempo",
+      "PostgreSQL",
+      "PgBouncer",
+      "Redis",
+      "RabbitMQ",
+      "Nginx ou HAProxy",
+      "pip-audit",
+      "Semgrep",
+      "Trivy",
+      "OWASP ZAP",
+      "Toxiproxy",
+      "Debezium",
+      "Kafka ou Redpanda",
+      "Ansible",
+      "Terraform",
+      "K3s"
+    ],
+    "introduced": [
+      "Python 3.14",
+      "uv",
+      "FastAPI",
+      "Uvicorn",
+      "SQLAlchemy",
+      "SQLite",
+      "Jinja2"
+    ],
+    "well_covered": []
+  },
+  "possible_challenges": [
+    "foundation-001: testes isolados e ambiente reproduzível",
+    "delivery-001: aplicação funciona localmente, mas não no host Arch Linux",
+    "observability-001: degradação sem evidência suficiente para diagnóstico",
+    "database-001: vendas concorrentes violam a invariável de estoque",
+    "database-002: catálogo degrada com alta cardinalidade",
+    "connections-001: mais workers esgotam conexões do banco",
+    "cache-001: leituras repetidas saturam o banco e depois ficam inconsistentes",
+    "messaging-001: trabalho lento bloqueia a requisição e retries geram duplicação",
+    "scaling-001: segunda instância expõe dependência de estado local",
+    "security-001: abuso de autenticação, sessão e endpoints de escrita",
+    "resilience-001: dependência lenta causa falha em cascata",
+    "architecture-001: integração por eventos e extração seletiva de componente"
+  ],
+  "completion_rule": "Um item só entra em well_covered depois de evidência prática, trade-offs documentados e uso sério em mais de uma etapa."
+}

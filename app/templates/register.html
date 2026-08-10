@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Criar conta — ScalePass{% endblock %}
+
+{% block content %}
+<section class="form-card narrow">
+    <p class="eyebrow">Nova conta</p>
+    <h1>Crie sua conta</h1>
+    <p>Use seu e-mail para comprar ingressos e publicar eventos.</p>
+    {% if error %}<p class="alert">{{ error }}</p>{% endif %}
+    <form method="post" action="/register">
+        <label>E-mail
+            <input type="email" name="email" value="{{ email or '' }}" required autofocus>
+        </label>
+        <label>Senha
+            <input type="password" name="password" minlength="4" required>
+        </label>
+        <button class="button" type="submit">Criar conta</button>
+    </form>
+    <p class="form-help">Já possui uma conta? <a href="/login">Entrar</a></p>
+</section>
+{% endblock %}

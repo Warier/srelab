@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Meus ingressos — ScalePass{% endblock %}
+
+{% block content %}
+<section>
+    <p class="eyebrow">Sua conta</p>
+    <h1>Meus ingressos</h1>
+    {% if orders %}
+    <div class="order-list">
+        {% for order in orders %}
+        <article class="order-card">
+            <div>
+                <span class="status">{{ order.status }}</span>
+                <h2><a href="/events/{{ order.event.id }}">{{ order.event.title }}</a></h2>
+                <p>{{ order.event.event_date.strftime('%d/%m/%Y às %H:%M') }} · {{ order.event.venue }}</p>
+            </div>
+            <div class="order-summary">
+                <strong>{{ order.quantity }} ingresso(s)</strong>
+                <span>{{ order.total_cents|money }}</span>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h3>Você ainda não possui ingressos.</h3>
+        <p>Consulte os eventos disponíveis e faça sua primeira compra.</p>
+        <a class="button" href="/">Explorar eventos</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

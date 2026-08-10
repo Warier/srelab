@@ -1,0 +1,1 @@
+"""ScalePass web application."""

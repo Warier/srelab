@@ -1,0 +1,17 @@
+[project]
+name = "scalepass"
+version = "0.1.0"
+description = "Aplicação web para criação de eventos e venda de ingressos."
+readme = "README.md"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "fastapi>=0.116,<1.0",
+    "itsdangerous>=2.2,<3.0",
+    "jinja2>=3.1,<4.0",
+    "python-multipart>=0.0.20,<1.0",
+    "sqlalchemy>=2.0,<3.0",
+    "uvicorn>=0.35,<1.0",
+]
+
+[tool.uv]
+package = false

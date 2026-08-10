@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Eventos — ScalePass{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">Eventos e experiências</p>
+    <h1>Seu próximo evento começa aqui.</h1>
+    <p>Descubra eventos, garanta seus ingressos e acompanhe suas compras.</p>
+    {% if current_user %}
+        <a class="button" href="/events/new">Publicar um evento</a>
+    {% else %}
+        <a class="button" href="/register">Começar agora</a>
+    {% endif %}
+</section>
+
+<section>
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Programação</p>
+            <h2>Próximos eventos</h2>
+        </div>
+        <span>{{ events|length }} evento(s)</span>
+    </div>
+
+    {% if events %}
+    <div class="event-grid">
+        {% for event in events %}
+        <article class="card">
+            <p class="event-date">{{ event.event_date.strftime('%d/%m/%Y às %H:%M') }}</p>
+            <h3><a href="/events/{{ event.id }}">{{ event.title }}</a></h3>
+            <p>{{ event.venue }}</p>
+            <div class="card-footer">
+                <strong>{{ event.price_cents|money }}</strong>
+                <span>{{ event.available_tickets }} disponíveis</span>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h3>Nenhum evento publicado ainda.</h3>
+        <p>Entre na sua conta e publique o primeiro evento do ScalePass.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

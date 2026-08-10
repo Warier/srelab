@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}ScalePass{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="/">ScalePass</a>
+        <nav>
+            {% if current_user %}
+                <a href="/events/new">Criar evento</a>
+                <a href="/orders">Meus ingressos</a>
+                <form class="inline" action="/logout" method="post">
+                    <button class="link-button" type="submit">Sair</button>
+                </form>
+            {% else %}
+                <a href="/login">Entrar</a>
+                <a class="button small" href="/register">Criar conta</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <span>ScalePass</span>
+        <span>Eventos perto de você.</span>
+    </footer>
+</body>
+</html>

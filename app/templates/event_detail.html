@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ event.title }} — ScalePass{% endblock %}
+
+{% block content %}
+<article class="event-detail">
+    <div>
+        <p class="eyebrow">{{ event.event_date.strftime('%d/%m/%Y às %H:%M') }}</p>
+        <h1>{{ event.title }}</h1>
+        <p class="lead">{{ event.description }}</p>
+        <dl class="details">
+            <div><dt>Local</dt><dd>{{ event.venue }}</dd></div>
+            <div><dt>Organizador</dt><dd>{{ event.creator.email }}</dd></div>
+            <div><dt>Disponibilidade</dt><dd>{{ event.available_tickets }} ingressos</dd></div>
+        </dl>
+    </div>
+
+    <aside class="purchase-card">
+        <p>A partir de</p>
+        <strong>{{ event.price_cents|money }}</strong>
+        {% if error %}<p class="alert">{{ error }}</p>{% endif %}
+        {% if event.available_tickets > 0 %}
+            {% if current_user %}
+            <form action="/events/{{ event.id }}/buy" method="post">
+                <label>Quantidade
+                    <input type="number" name="quantity" value="1" min="1" max="10" required>
+                </label>
+                <button class="button full" type="submit">Comprar ingressos</button>
+            </form>
+            {% else %}
+            <a class="button full" href="/login">Entrar para comprar</a>
+            {% endif %}
+        {% else %}
+            <p class="sold-out">Ingressos esgotados</p>
+        {% endif %}
+    </aside>
+</article>
+{% endblock %}
