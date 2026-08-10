@@ -13,15 +13,15 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `testing-001`, descrito em
-  `docs/studies/challenges/001-isolated-http-tests/README.md`.
+- Desafio ativo: `quality-001`, descrito em
+  `docs/studies/challenges/002-ruff-quality-gate/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
 - Autenticação: sessão por cookie e hash de senha propositalmente simples.
 - Operação: processo único, sem containers, CI, métricas, traces ou logs
   estruturados.
-- Testes automatizados: ainda não existem; criá-los é o primeiro desafio.
+- Testes automatizados: três testes de integração HTTP isolados com Pytest.
 
 Antes de modificar código, leia, nesta ordem:
 
@@ -97,15 +97,16 @@ continuar sendo a solução correta.
 
 ## Verificações do estágio atual
 
-Enquanto `testing-001` não estiver concluído:
+Verificações atualmente incorporadas ao projeto:
 
 ```bash
 uv sync --locked
+uv run pytest -q
 uv run uvicorn app.main:app --reload
 ```
 
-Depois dele, inclua `uv run pytest -q`. Ruff, Mypy, cobertura e CI só entram quando
-seus desafios específicos forem concluídos.
+Ruff está sendo introduzido no desafio ativo. Mypy, cobertura e CI só entram
+quando seus desafios específicos forem concluídos.
 
 ## Política de documentação
 
