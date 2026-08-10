@@ -17,7 +17,7 @@ ser capazes de distinguir uma falha nova de uma regressão funcional comum.
 ## Sintomas observáveis
 
 - Não existe comando automatizado que confirme o fluxo principal.
-- O `uv.lock` existe, mas ainda não faz parte de um checkpoint Git reproduzível.
+- O lockfile existe, mas ainda não há um quality gate que exija sua consistência.
 - Não há dependências ou configuração próprias para desenvolvimento e testes.
 - Cada mudança exige repetir manualmente cadastro, evento e compra.
 - Não há garantia de que um teste futuro deixará `scalepass.db` intacto.
@@ -49,7 +49,7 @@ configuração fazem parte do desafio.
 
 ## Requisitos
 
-1. Confirmar e versionar um `uv.lock` coerente com o `pyproject.toml`.
+1. Demonstrar uma instalação limpa com `uv sync --locked` e manter o lock coerente.
 2. Separar dependências de desenvolvimento das dependências de runtime.
 3. Disponibilizar comandos claros para lint, formato, tipos e testes.
 4. Testar ao menos estes comportamentos pela interface HTTP:
