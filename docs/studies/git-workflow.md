@@ -6,43 +6,39 @@ Aplicação, documentação, scripts de carga, infraestrutura e futuros serviço
 em um único repositório.
 
 O histórico deve permitir que outra pessoa recupere o sistema antes de cada
-desafio, tente uma solução própria e depois compare seu resultado com a solução
-oficial documentada.
+desafio, tente uma solução própria e depois compare com a solução oficial.
 
 ## Por que um monorepo
 
-- Código, configuração, documentação e evidências pequenas permanecem coerentes.
+- Código, configuração, documentação e evidências permanecem coerentes.
 - Uma tag captura o estado completo de cada experimento.
 - CI/CD evolui junto da aplicação.
-- Uma pessoa não precisa coordenar versões de vários repositórios para refazer o
-  estudo.
+- Não é necessário coordenar versões de vários repositórios para refazer o estudo.
 
-Quando surgirem microsserviços, eles começam em diretórios como
-`services/payments/` ou `services/notifications/`. Separá-los em outros repositórios
-só será considerado se houver uma necessidade demonstrada de permissões, ownership
-ou ciclo de release independente. Essa separação seria um desafio e uma decisão
-arquitetural, não uma organização feita antecipadamente.
+Futuros microsserviços começam em diretórios como `services/payments/` ou
+`services/notifications/`. Um serviço só muda de repositório se um desafio
+demonstrar necessidade de permissões, ownership ou release independente.
 
 ## Branches
 
 `main` contém o último estado oficial concluído e reproduzível. Aplicação e
 documentação avançam juntas.
 
-Cada desafio usa uma branch curta:
+Cada desafio usa uma branch curta sem prefixo de ferramenta:
 
 ```text
-codex/challenge/001-foundation-tests
-codex/challenge/002-first-ci
-codex/challenge/003-limited-host-deploy
+challenge/001-isolated-http-tests
+challenge/002-ruff-quality-gate
+challenge/003-static-typing
 ```
 
 Uma pessoa refazendo o laboratório pode usar seu próprio namespace:
 
 ```text
-learn/alice/001-foundation-tests
+learn/alice/001-isolated-http-tests
 ```
 
-Branches concluídas podem ser removidas. As tags são os checkpoints permanentes.
+Branches concluídas podem ser removidas. Tags são os checkpoints permanentes.
 
 ## Tags
 
@@ -53,72 +49,61 @@ challenge/001/start
 challenge/001/solved
 ```
 
-- `start` contém a aplicação problemática, o enunciado e uma solução ainda
-  marcada como `pending`.
-- `solved` contém a solução, evidências, documentação atualizada e o código
-  oficial corrigido.
+- `start` contém a aplicação problemática, o enunciado e `solution.md` pendente.
+- `solved` contém código, solução, evidências e documentação atualizados.
 
 Versões do produto usam tags SemVer independentes, como `v0.1.0`. Nunca mova uma
-tag pedagógica já publicada.
+tag pedagógica publicada.
 
 ## Commits
 
-Não use obrigatoriamente um commit por lição. Uma lição pode conter refatoração,
-testes, automação e documentação, e juntá-los em um commit tornaria a revisão pior.
-
-Prefira commits pequenos, coerentes e executáveis:
+Não use obrigatoriamente um commit por lição. Prefira commits pequenos, coerentes e
+executáveis:
 
 ```text
-test: add isolated database fixture
-refactor: make application dependencies configurable
-ci: run quality checks on pull requests
+test: add temporary database fixture
+test: cover successful ticket purchase
+test: cover rejected ticket purchases
 docs: record challenge 001 solution and evidence
 ```
 
 Regras práticas:
 
-- cada commit deve ter uma intenção principal;
-- não misture formatação mecânica e mudança de comportamento;
-- não versione segredos, bancos locais, ambientes virtuais ou artefatos grandes;
-- versione scripts e configurações usados para produzir evidências;
-- resuma resultados em Markdown, JSON ou CSV pequeno;
-- dashboards relevantes podem ser exportados como JSON;
-- logs completos, dumps e relatórios HTML gerados ficam fora do Git.
+- cada commit tem uma intenção principal;
+- formatação mecânica e comportamento não são misturados;
+- segredos, bancos, ambientes virtuais e artefatos grandes não são versionados;
+- scripts e configurações usados para produzir evidências são versionados;
+- resultados são resumidos em Markdown, JSON ou CSV pequeno.
 
-## Fluxo de um desafio
+## Fluxo do desafio 001
 
 ### Preparar o checkpoint
 
-O mantenedor registra o baseline, cria a tag de entrada e abre a branch:
-
 ```bash
 git switch main
-git tag -a challenge/001/start -m "Start challenge 001: foundation and tests"
-git switch -c codex/challenge/001-foundation-tests
+git tag -a challenge/001/start -m "Start challenge 001: isolated HTTP tests"
+git switch -c challenge/001-isolated-http-tests
 ```
 
 ### Investigar e implementar
 
-Faça commits lógicos. Registre hipóteses e resultados que influenciaram decisões;
-não é necessário manter um diário de cada comando executado.
+Faça commits lógicos e registre hipóteses que influenciaram a solução. Não é
+necessário manter um diário de cada comando.
 
-### Documentar a solução
+### Documentar
 
-Complete `solution.md` e as evidências pequenas do desafio. Atualize arquitetura,
-currículo e `AGENTS.md` quando o estado do projeto mudar.
+Complete `solution.md` e `evidence/README.md`. Atualize arquitetura, currículo e
+`AGENTS.md` quando o estado do projeto mudar.
 
-### Incorporar e marcar a conclusão
-
-Depois da revisão:
+### Incorporar e marcar
 
 ```bash
 git switch main
-git merge --no-ff codex/challenge/001-foundation-tests
-git tag -a challenge/001/solved -m "Solve challenge 001: foundation and tests"
+git merge --no-ff challenge/001-isolated-http-tests
+git tag -a challenge/001/solved -m "Solve challenge 001: isolated HTTP tests"
 ```
 
-O merge commit torna visível o limite pedagógico. Squash ou rebase podem ser úteis
-em outros projetos; aqui, preservar a sequência da investigação tem valor.
+O merge commit preserva a fronteira pedagógica da etapa.
 
 ## Como outra pessoa refaz o estudo
 
@@ -126,13 +111,13 @@ em outros projetos; aqui, preservar a sequência da investigação tem valor.
 git clone <url-do-repositorio>
 cd scalepass
 git switch --detach challenge/001/start
-git switch -c learn/seu-nome/001-foundation-tests
+git switch -c learn/seu-nome/001-isolated-http-tests
 ```
 
 Depois de tentar, a solução oficial pode ser consultada sem alterar a branch:
 
 ```bash
-git show challenge/001/solved:docs/studies/challenges/001-foundation-and-tests/solution.md
+git show challenge/001/solved:docs/studies/challenges/001-isolated-http-tests/solution.md
 ```
 
 Para o desafio seguinte, use a respectiva tag `challenge/NNN/start`.

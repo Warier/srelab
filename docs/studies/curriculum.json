@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "updated_at": "2026-08-09",
   "current_stage": "baseline-v0",
-  "active_challenge": "foundation-001",
+  "active_challenge": "testing-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -10,8 +10,11 @@
   },
   "concepts": {
     "to_cover": [
-      "estratégia de testes e pirâmide de testes",
-      "qualidade automatizada e CI/CD",
+      "isolamento de testes de integração",
+      "lint e formatação automatizados",
+      "análise estática de tipos",
+      "cobertura orientada a risco",
+      "integração e entrega contínuas",
       "observabilidade, SLI, SLO e error budget",
       "testes de carga e planejamento de capacidade",
       "concorrência, transações e isolamento",
@@ -39,11 +42,13 @@
   "tools": {
     "to_cover": [
       "pytest",
+      "HTTPX TestClient",
       "Ruff",
-      "Mypy ou Pyright",
+      "Mypy",
+      "pytest-cov",
       "GitHub Actions",
       "SonarQube",
-      "Docker ou Podman",
+      "Docker",
       "Locust",
       "Prometheus",
       "Grafana",
@@ -77,19 +82,61 @@
     ],
     "well_covered": []
   },
-  "possible_challenges": [
-    "foundation-001: testes isolados e ambiente reproduzível",
-    "delivery-001: aplicação funciona localmente, mas não no host Arch Linux",
-    "observability-001: degradação sem evidência suficiente para diagnóstico",
-    "database-001: vendas concorrentes violam a invariável de estoque",
-    "database-002: catálogo degrada com alta cardinalidade",
-    "connections-001: mais workers esgotam conexões do banco",
-    "cache-001: leituras repetidas saturam o banco e depois ficam inconsistentes",
-    "messaging-001: trabalho lento bloqueia a requisição e retries geram duplicação",
-    "scaling-001: segunda instância expõe dependência de estado local",
-    "security-001: abuso de autenticação, sessão e endpoints de escrita",
-    "resilience-001: dependência lenta causa falha em cascata",
-    "architecture-001: integração por eventos e extração seletiva de componente"
+  "next_challenges": [
+    {
+      "id": "testing-001",
+      "objective": "Testar a venda por HTTP com banco SQLite temporário.",
+      "tool": "pytest e FastAPI TestClient",
+      "proof": "Três testes passam duas vezes e scalepass.db não muda."
+    },
+    {
+      "id": "quality-001",
+      "objective": "Aplicar lint e formato consistentes.",
+      "tool": "Ruff",
+      "proof": "ruff check . e ruff format --check . retornam zero."
+    },
+    {
+      "id": "typing-001",
+      "objective": "Verificar estaticamente o código da aplicação.",
+      "tool": "Mypy",
+      "proof": "mypy app retorna zero sem ignorar módulos inteiros."
+    },
+    {
+      "id": "testing-002",
+      "objective": "Encontrar e cobrir ramos críticos ainda sem teste.",
+      "tool": "pytest-cov",
+      "proof": "Relatório branch coverage explica as lacunas e os novos testes."
+    },
+    {
+      "id": "ci-001",
+      "objective": "Executar automaticamente as verificações já aprendidas.",
+      "tool": "GitHub Actions",
+      "proof": "Uma alteração quebrada falha e a correção deixa o job verde."
+    },
+    {
+      "id": "delivery-001",
+      "objective": "Empacotar a aplicação em uma imagem reproduzível.",
+      "tool": "Docker",
+      "proof": "Imagem construída do zero responde ao smoke test."
+    },
+    {
+      "id": "load-001",
+      "objective": "Medir o baseline do fluxo de navegação e compra.",
+      "tool": "Locust",
+      "proof": "Cenário versionado produz RPS e p95 repetíveis."
+    },
+    {
+      "id": "observability-001",
+      "objective": "Expor métricas HTTP de taxa, erro e duração.",
+      "tool": "Prometheus client",
+      "proof": "As três métricas são consultáveis durante uma carga."
+    },
+    {
+      "id": "database-001",
+      "objective": "Reproduzir e depois impedir violação concorrente do estoque.",
+      "tool": "PostgreSQL",
+      "proof": "O teste concorrente passa sem estoque negativo nem overselling."
+    }
   ],
   "completion_rule": "Um item só entra em well_covered depois de evidência prática, trade-offs documentados e uso sério em mais de uma etapa."
 }
