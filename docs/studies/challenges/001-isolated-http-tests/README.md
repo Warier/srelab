@@ -2,7 +2,7 @@
 
 ## Estado
 
-`active`
+`solved`
 
 ## Resultado único esperado
 
@@ -242,4 +242,4 @@ de um cenário autenticado.
 - Tag inicial: `challenge/001/start`.
 - Branch: `challenge/001-isolated-http-tests`.
 - Tag futura da solução: `challenge/001/solved`.
-- Solução oficial: [solution.md](solution.md), ainda `pending`.
+- Solução oficial: [solution.md](solution.md).
