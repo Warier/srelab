@@ -14,7 +14,7 @@
 - [Inventário de temas e ferramentas](studies/curriculum.json)
 - [Estratégia de Git](studies/git-workflow.md)
 - [Ciclo de vida dos desafios](studies/challenge-lifecycle.md)
-- [Desafio ativo: cobertura de branches](studies/challenges/004-risk-based-coverage/README.md)
+- [Desafio ativo: quality gate no GitHub Actions](studies/challenges/005-github-actions-quality-gate/README.md)
 
 A documentação arquitetural deve representar somente o sistema que existe. Ideias
 e tecnologias candidatas permanecem no roteiro até serem adotadas por uma decisão

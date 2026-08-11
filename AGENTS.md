@@ -13,8 +13,8 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `testing-002`, descrito em
-  `docs/studies/challenges/004-risk-based-coverage/README.md`.
+- Desafio ativo: `ci-001`, descrito em
+  `docs/studies/challenges/005-github-actions-quality-gate/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
@@ -102,14 +102,14 @@ Verificações atualmente incorporadas ao projeto:
 ```bash
 uv sync --locked
 uv run pytest -q
+uv run --group coverage pytest --cov=app --cov-report=term-missing
 uv run --group lint ruff check .
 uv run --group lint ruff format --check .
 uv run --group typing mypy app
 uv run uvicorn app.main:app --reload
 ```
 
-Ruff e Mypy foram incorporados. Cobertura está no desafio ativo; CI entra no
-desafio seguinte.
+Ruff, Mypy e cobertura foram incorporados. CI está no desafio ativo.
 
 ## Política de documentação
 

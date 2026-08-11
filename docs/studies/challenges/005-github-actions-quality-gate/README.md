@@ -2,7 +2,7 @@
 
 ## Estado
 
-`queued` — inicia somente depois de `challenge/004/solved`.
+`active`.
 
 ## Resultado esperado
 

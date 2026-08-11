@@ -2,7 +2,7 @@
 
 ## Estado
 
-`queued`
+`pending`
 
 ## Workflow e decisões
 

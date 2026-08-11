@@ -2,7 +2,7 @@
   "schema_version": 2,
   "updated_at": "2026-08-11",
   "current_stage": "baseline-v0",
-  "active_challenge": "testing-002",
+  "active_challenge": "ci-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -10,7 +10,6 @@
   },
   "concepts": {
     "to_cover": [
-      "cobertura orientada a risco",
       "integração e entrega contínuas",
       "observabilidade, SLI, SLO e error budget",
       "testes de carga e planejamento de capacidade",
@@ -35,13 +34,13 @@
       "configuração simples por variáveis de ambiente",
       "isolamento de testes de integração",
       "lint e formatação automatizados",
-      "análise estática de tipos"
+      "análise estática de tipos",
+      "cobertura orientada a risco"
     ],
     "well_covered": []
   },
   "tools": {
     "to_cover": [
-      "pytest-cov",
       "GitHub Actions",
       "SonarQube",
       "Docker",
@@ -78,17 +77,12 @@
       "pytest",
       "HTTPX TestClient",
       "Ruff",
-      "Mypy"
+      "Mypy",
+      "pytest-cov"
     ],
     "well_covered": []
   },
   "next_challenges": [
-    {
-      "id": "testing-002",
-      "objective": "Encontrar e cobrir ramos críticos ainda sem teste.",
-      "tool": "pytest-cov",
-      "proof": "Relatório branch coverage explica as lacunas e os novos testes."
-    },
     {
       "id": "ci-001",
       "objective": "Executar automaticamente as verificações já aprendidas.",
