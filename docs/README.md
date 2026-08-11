@@ -14,7 +14,7 @@
 - [Inventário de temas e ferramentas](studies/curriculum.json)
 - [Estratégia de Git](studies/git-workflow.md)
 - [Ciclo de vida dos desafios](studies/challenge-lifecycle.md)
-- [Desafio ativo: contratos de retorno com Mypy](studies/challenges/003-static-typing/README.md)
+- [Desafio ativo: cobertura de branches](studies/challenges/004-risk-based-coverage/README.md)
 
 A documentação arquitetural deve representar somente o sistema que existe. Ideias
 e tecnologias candidatas permanecem no roteiro até serem adotadas por uma decisão

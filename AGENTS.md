@@ -13,8 +13,8 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `typing-001`, descrito em
-  `docs/studies/challenges/003-static-typing/README.md`.
+- Desafio ativo: `testing-002`, descrito em
+  `docs/studies/challenges/004-risk-based-coverage/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
@@ -104,11 +104,12 @@ uv sync --locked
 uv run pytest -q
 uv run --group lint ruff check .
 uv run --group lint ruff format --check .
+uv run --group typing mypy app
 uv run uvicorn app.main:app --reload
 ```
 
-Ruff foi incorporado. Mypy está sendo introduzido no desafio ativo; cobertura e
-CI só entram em seus desafios específicos.
+Ruff e Mypy foram incorporados. Cobertura está no desafio ativo; CI entra no
+desafio seguinte.
 
 ## Política de documentação
 
