@@ -1,0 +1,39 @@
+name: Quality Gate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gate:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+      - name: set up uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.9.30"
+          python-version: "3.14"
+          enable-cache: true
+      - name: Install dependencies
+        run: uv sync --locked --all-groups
+
+      - name: Run Pytest and Coverage
+        run: uv run --frozen pytest --cov=app --cov-report=term-missing
+
+      - name: Run Mypy
+        run: uv run --frozen mypy app
+
+      - name: Run Ruff Lint
+        run: uv run --frozen ruff check .
+
+      - name: Run Ruff Format Check
+        run: uv run --frozen ruff format --check .
