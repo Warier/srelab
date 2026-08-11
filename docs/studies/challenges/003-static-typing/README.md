@@ -2,7 +2,7 @@
 
 ## Estado
 
-`active`
+`solved`
 
 ## Resultado único esperado
 
@@ -119,4 +119,4 @@ Referências oficiais:
 - Tag inicial: `challenge/003/start`.
 - Branch: `challenge/003-static-typing`.
 - Tag futura: `challenge/003/solved`.
-- Solução: [solution.md](solution.md), ainda `pending`.
+- Solução: [solution.md](solution.md).

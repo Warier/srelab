@@ -5,7 +5,7 @@ from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, Form, Request, status
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import select
@@ -81,7 +81,7 @@ def register(
     email: Annotated[str, Form()],
     password: Annotated[str, Form()],
     database: Annotated[Session, Depends(get_db)],
-) -> HTMLResponse:
+) -> Response:
     normalized_email = email.lower().strip()
     error = None
 
@@ -129,7 +129,7 @@ def login(
     email: Annotated[str, Form()],
     password: Annotated[str, Form()],
     database: Annotated[Session, Depends(get_db)],
-) -> HTMLResponse:
+) -> Response:
     user = authenticate(database, email, password)
     if user is None:
         return templates.TemplateResponse(
@@ -158,7 +158,7 @@ def logout(request: Request) -> RedirectResponse:
 def new_event_page(
     request: Request,
     database: Annotated[Session, Depends(get_db)],
-) -> HTMLResponse:
+) -> Response:
     if current_user(request, database) is None:
         return RedirectResponse("/login", status_code=status.HTTP_303_SEE_OTHER)
 
@@ -179,7 +179,7 @@ def create_event(
     price: Annotated[str, Form()],
     available_tickets: Annotated[int, Form()],
     database: Annotated[Session, Depends(get_db)],
-) -> HTMLResponse:
+) -> Response:
     user = current_user(request, database)
     if user is None:
         return RedirectResponse("/login", status_code=status.HTTP_303_SEE_OTHER)
@@ -254,7 +254,7 @@ def buy_tickets(
     request: Request,
     quantity: Annotated[int, Form()],
     database: Annotated[Session, Depends(get_db)],
-) -> HTMLResponse:
+) -> Response:
     user = current_user(request, database)
     if user is None:
         return RedirectResponse("/login", status_code=status.HTTP_303_SEE_OTHER)
@@ -301,7 +301,7 @@ def buy_tickets(
 def orders(
     request: Request,
     database: Annotated[Session, Depends(get_db)],
-) -> HTMLResponse:
+) -> Response:
     user = current_user(request, database)
     if user is None:
         return RedirectResponse("/login", status_code=status.HTTP_303_SEE_OTHER)
