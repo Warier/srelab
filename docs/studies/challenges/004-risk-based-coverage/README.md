@@ -2,7 +2,7 @@
 
 ## Estado
 
-`active`
+`solved`
 
 ## Resultado esperado
 
