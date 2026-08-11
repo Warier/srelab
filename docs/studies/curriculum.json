@@ -2,7 +2,7 @@
   "schema_version": 2,
   "updated_at": "2026-08-11",
   "current_stage": "baseline-v0",
-  "active_challenge": "ci-001",
+  "active_challenge": "delivery-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -10,7 +10,6 @@
   },
   "concepts": {
     "to_cover": [
-      "integração e entrega contínuas",
       "observabilidade, SLI, SLO e error budget",
       "testes de carga e planejamento de capacidade",
       "concorrência, transações e isolamento",
@@ -35,13 +34,13 @@
       "isolamento de testes de integração",
       "lint e formatação automatizados",
       "análise estática de tipos",
-      "cobertura orientada a risco"
+      "cobertura orientada a risco",
+      "integração e entrega contínuas"
     ],
     "well_covered": []
   },
   "tools": {
     "to_cover": [
-      "GitHub Actions",
       "SonarQube",
       "Docker",
       "Locust",
@@ -78,17 +77,12 @@
       "HTTPX TestClient",
       "Ruff",
       "Mypy",
-      "pytest-cov"
+      "pytest-cov",
+      "GitHub Actions"
     ],
     "well_covered": []
   },
   "next_challenges": [
-    {
-      "id": "ci-001",
-      "objective": "Executar automaticamente as verificações já aprendidas.",
-      "tool": "GitHub Actions",
-      "proof": "Uma alteração quebrada falha e a correção deixa o job verde."
-    },
     {
       "id": "delivery-001",
       "objective": "Empacotar a aplicação em uma imagem reproduzível.",

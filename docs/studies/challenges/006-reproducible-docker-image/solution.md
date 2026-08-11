@@ -2,7 +2,7 @@
 
 ## Estado
 
-`queued`
+`pending`
 
 ## Build e runtime
 

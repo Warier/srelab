@@ -2,7 +2,7 @@
 
 ## Estado
 
-`queued`
+`pending`
 
 ## Imagem e container
 
