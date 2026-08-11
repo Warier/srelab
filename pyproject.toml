@@ -17,6 +17,9 @@ dependencies = [
 package = false
 
 [dependency-groups]
+coverage = [
+    "pytest-cov>=7.1.0",
+]
 dev = [
     "httpx>=0.28.1",
     "pytest>=9.1.1",
@@ -42,3 +45,11 @@ python_version = "3.14"
 strict = true
 files = ["app"]
 show_error_codes = true
+
+[tool.coverage.run]
+branch = true
+source = ["app"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
