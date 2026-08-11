@@ -2,20 +2,32 @@
 
 ## Estado
 
-`pending`
+`documented`
 
 ## Diagnóstico
 
-Pendente.
+Oito caminhos retornavam `RedirectResponse` em funções anotadas como
+`HTMLResponse`. O comportamento funcionava, mas o contrato estático estava
+incompleto.
 
-## Contrato escolhido e trade-off
+## Contrato escolhido
 
-Pendente.
+As seis rotas com retornos mistos usam `Response`, classe-base comum de
+`HTMLResponse` e `RedirectResponse`. É menos específico que uma união, mas é aceito
+simultaneamente pelo Mypy e pela introspecção runtime do FastAPI.
+
+A união `HTMLResponse | RedirectResponse` foi testada e rejeitada: Mypy passava,
+porém o FastAPI tentava transformá-la em um response model Pydantic e falhava ao
+importar a aplicação.
 
 ## Alterações
 
-Pendente.
+- Mypy 2.3.0 no dependency group `typing`;
+- modo estrito configurado para os seis arquivos de `app/`;
+- import de `Response` e correção das seis anotações em `app/main.py`;
+- nenhuma mudança nas regras, redirects ou respostas HTTP.
 
 ## Prova final
 
-Pendente.
+Lockfile, Mypy, Ruff, formato e os três testes passaram. Consulte
+[evidence/README.md](evidence/README.md).
