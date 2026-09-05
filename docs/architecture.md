@@ -19,6 +19,15 @@ flowchart LR
 
 Não existem serviços externos, jobs em segundo plano ou componentes distribuídos.
 
+### Operação no notebook
+
+No notebook Arch Linux, a mesma imagem Docker é mantida por uma unidade systemd.
+O container único possui volume nomeado para `/data`, limite de 384 MiB, quota de
+0,5 CPU e política de reinício do Docker desativada; systemd observa
+`docker start -a` e é o responsável pela recuperação após falha. A porta 8000 é
+publicada na rede local para o PC principal. Isto não muda o modelo de um processo
+ou uma instância da aplicação.
+
 ## Componentes
 
 ### Entrada HTTP
@@ -102,7 +111,8 @@ imediatamente um pedido com estado `paid`.
 - Todas as consultas e escritas acontecem de forma síncrona.
 - Catálogo e histórico ainda não possuem paginação.
 - Criação de esquema não mantém histórico de alterações.
-- Não existem métricas, traces, logs estruturados ou health checks.
+- Não existem métricas, traces ou logs estruturados. A imagem possui somente um
+  healthcheck Docker local em `/api/events`.
 - Não existem cache, fila, workers ou processamento periódico.
 - O endpoint JSON disponível é somente leitura.
 

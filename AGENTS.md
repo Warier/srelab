@@ -13,8 +13,8 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `operation-001`, descrito em
-  `docs/studies/challenges/007-notebook-service-operation/README.md`.
+- Desafio ativo: `load-001`, descrito em
+  `docs/studies/challenges/008-notebook-load-baseline/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
@@ -109,8 +109,8 @@ uv run --group typing mypy app
 uv run uvicorn app.main:app --reload
 ```
 
-Ruff, Mypy, cobertura, CI e Docker foram incorporados. A operação no notebook
-está no desafio ativo.
+Ruff, Mypy, cobertura, CI, Docker e systemd foram incorporados. A medição de
+carga no notebook está no desafio ativo.
 
 ## Política de documentação
 

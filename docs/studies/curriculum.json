@@ -2,7 +2,7 @@
   "schema_version": 2,
   "updated_at": "2026-09-05",
   "current_stage": "baseline-v0",
-  "active_challenge": "operation-001",
+  "active_challenge": "load-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -78,16 +78,17 @@
       "Mypy",
       "pytest-cov",
       "GitHub Actions",
-      "Docker"
+      "Docker",
+      "systemd"
     ],
     "well_covered": []
   },
   "next_challenges": [
     {
-      "id": "operation-001",
-      "objective": "Operar a imagem no notebook com recuperação automática e limites explícitos.",
-      "tool": "systemd + Docker",
-      "proof": "Falha do container é recuperada por systemd e o PC principal recebe HTTP 200 pela LAN."
+      "id": "load-001",
+      "objective": "Medir o baseline de navegação e compra sob os limites do notebook.",
+      "tool": "Locust",
+      "proof": "Duas execuções headless do cenário versionado registram RPS, falhas e percentis por rota."
     },
     {
       "id": "load-001",
