@@ -14,7 +14,7 @@
 - [Inventário de temas e ferramentas](studies/curriculum.json)
 - [Estratégia de Git](studies/git-workflow.md)
 - [Ciclo de vida dos desafios](studies/challenge-lifecycle.md)
-- [Desafio ativo: imagem Docker reproduzível](studies/challenges/006-reproducible-docker-image/README.md)
+- [Desafio ativo: serviço recuperável no notebook](studies/challenges/007-notebook-service-operation/README.md)
 
 A documentação arquitetural deve representar somente o sistema que existe. Ideias
 e tecnologias candidatas permanecem no roteiro até serem adotadas por uma decisão

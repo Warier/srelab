@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-08-11",
+  "updated_at": "2026-09-05",
   "current_stage": "baseline-v0",
-  "active_challenge": "delivery-001",
+  "active_challenge": "operation-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -42,7 +42,6 @@
   "tools": {
     "to_cover": [
       "SonarQube",
-      "Docker",
       "Locust",
       "Prometheus",
       "Grafana",
@@ -78,16 +77,17 @@
       "Ruff",
       "Mypy",
       "pytest-cov",
-      "GitHub Actions"
+      "GitHub Actions",
+      "Docker"
     ],
     "well_covered": []
   },
   "next_challenges": [
     {
-      "id": "delivery-001",
-      "objective": "Empacotar a aplicação em uma imagem reproduzível.",
-      "tool": "Docker",
-      "proof": "Imagem construída do zero responde ao smoke test."
+      "id": "operation-001",
+      "objective": "Operar a imagem no notebook com recuperação automática e limites explícitos.",
+      "tool": "systemd + Docker",
+      "proof": "Falha do container é recuperada por systemd e o PC principal recebe HTTP 200 pela LAN."
     },
     {
       "id": "load-001",

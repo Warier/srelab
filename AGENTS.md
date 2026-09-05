@@ -13,8 +13,8 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `delivery-001`, descrito em
-  `docs/studies/challenges/006-reproducible-docker-image/README.md`.
+- Desafio ativo: `operation-001`, descrito em
+  `docs/studies/challenges/007-notebook-service-operation/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
@@ -109,7 +109,8 @@ uv run --group typing mypy app
 uv run uvicorn app.main:app --reload
 ```
 
-Ruff, Mypy, cobertura e CI foram incorporados. Docker está no desafio ativo.
+Ruff, Mypy, cobertura, CI e Docker foram incorporados. A operação no notebook
+está no desafio ativo.
 
 ## Política de documentação
 
