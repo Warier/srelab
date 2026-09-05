@@ -58,7 +58,7 @@ nem copie seu valor para as evidências:
 ```bash
 sudo install -d -m 0750 /etc/scalepass
 sudo sh -c 'umask 077; openssl rand -hex 32 > /etc/scalepass/secret'
-sudo sh -c 'printf "SCALEPASS_SECRET_KEY=%s\\n" "$(cat /etc/scalepass/secret)" > /etc/scalepass/scalepass.env'
+sudo sh -c 'umask 077; printf "SCALEPASS_SECRET_KEY=%s\\n" "$(cat /etc/scalepass/secret)" > /etc/scalepass/scalepass.env'
 ```
 
 O comando acima só é um exemplo de geração. Confira permissões com
