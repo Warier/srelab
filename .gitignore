@@ -16,3 +16,4 @@ dist/
 build/
 *.egg-info/
 artifacts/load/
+observability/prometheus/prometheus.yml
