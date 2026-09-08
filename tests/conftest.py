@@ -50,3 +50,4 @@ def client(tmp_path: Path) -> Generator[TestClient]:
     # 7. Teardown: Restaura o estado original para evitar colateral em outros testes
     app.dependency_overrides.clear()
     db_module.engine = original_engine
+    test_engine.dispose()
