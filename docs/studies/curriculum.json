@@ -2,7 +2,7 @@
   "schema_version": 2,
   "updated_at": "2026-09-05",
   "current_stage": "baseline-v0",
-  "active_challenge": "observability-001",
+  "active_challenge": "visualization-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -35,7 +35,8 @@
       "lint e formatação automatizados",
       "análise estática de tipos",
       "cobertura orientada a risco",
-      "integração e entrega contínuas"
+      "integração e entrega contínuas",
+      "métricas HTTP com Counter e Histogram"
     ],
     "well_covered": []
   },
@@ -79,28 +80,17 @@
       "GitHub Actions",
       "Docker",
       "systemd",
-      "Locust"
+      "Locust",
+      "prometheus-client"
     ],
     "well_covered": []
   },
   "next_challenges": [
     {
-      "id": "observability-001",
-      "objective": "Expor métricas HTTP de taxa, status e duração no serviço em execução.",
-      "tool": "prometheus-client",
-      "proof": "Contador e histograma por rota aparecem em /metrics durante carga curta."
-    },
-    {
-      "id": "load-001",
-      "objective": "Medir o baseline do fluxo de navegação e compra.",
-      "tool": "Locust",
-      "proof": "Cenário versionado produz RPS e p95 repetíveis."
-    },
-    {
-      "id": "observability-001",
-      "objective": "Expor métricas HTTP de taxa, erro e duração.",
-      "tool": "Prometheus client",
-      "proof": "As três métricas são consultáveis durante uma carga."
+      "id": "visualization-001",
+      "objective": "Consultar métricas do notebook e visualizar carga em um dashboard reproduzível.",
+      "tool": "Prometheus + Grafana",
+      "proof": "Target fica UP e dashboard provisionado mostra taxa, erros, p95 e rotas durante carga."
     },
     {
       "id": "database-001",

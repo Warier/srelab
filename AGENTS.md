@@ -13,15 +13,16 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `observability-001`, descrito em
-  `docs/studies/challenges/009-http-prometheus-metrics/README.md`.
+- Desafio ativo: `visualization-001`, descrito em
+  `docs/studies/challenges/010-prometheus-grafana-dashboard/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
 - Autenticação: sessão por cookie e hash de senha propositalmente simples.
-- Operação: processo único, sem containers, CI, métricas, traces ou logs
+- Operação: um processo da aplicação em container, gerenciado por systemd no
+  notebook; CI e métricas HTTP expostas, sem servidor de métricas, traces ou logs
   estruturados.
-- Testes automatizados: três testes de integração HTTP isolados com Pytest.
+- Testes automatizados: 15 testes de integração HTTP isolados com Pytest.
 
 Antes de modificar código, leia, nesta ordem:
 
@@ -109,8 +110,8 @@ uv run --group typing mypy app
 uv run uvicorn app.main:app --reload
 ```
 
-Ruff, Mypy, cobertura, CI, Docker, systemd e Locust foram incorporados. As
-métricas HTTP Prometheus estão no desafio ativo.
+Ruff, Mypy, cobertura, CI, Docker, systemd, Locust e prometheus-client foram
+incorporados. Prometheus e Grafana estão no desafio ativo.
 
 ## Política de documentação
 

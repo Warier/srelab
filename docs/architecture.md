@@ -15,6 +15,7 @@ flowchart LR
     J -->|"HTML"| U
     R --> S["SQLAlchemy Session"]
     S --> D[("SQLite: scalepass.db")]
+    F --> M["/metrics: prometheus-client"]
 ```
 
 Não existem serviços externos, jobs em segundo plano ou componentes distribuídos.
@@ -37,6 +38,13 @@ endpoint JSON. Uvicorn fornece o servidor ASGI.
 
 As páginas são renderizadas com Jinja2. Não há frontend separado nem etapa de
 build de JavaScript.
+
+### Métricas HTTP
+
+O middleware HTTP mede contador e duração por método, template de rota e status.
+`GET /metrics` expõe o formato Prometheus e não mede a si próprio. Ainda não há
+servidor Prometheus, retenção, consulta PromQL, dashboard ou alerta; o endpoint
+é consultado manualmente na rede local.
 
 ### Autenticação
 
@@ -111,8 +119,8 @@ imediatamente um pedido com estado `paid`.
 - Todas as consultas e escritas acontecem de forma síncrona.
 - Catálogo e histórico ainda não possuem paginação.
 - Criação de esquema não mantém histórico de alterações.
-- Não existem métricas, traces ou logs estruturados. A imagem possui somente um
-  healthcheck Docker local em `/api/events`.
+- Existem métricas HTTP locais, mas não há servidor de métricas, traces ou logs
+  estruturados. A imagem possui healthcheck Docker em `/api/events`.
 - Não existem cache, fila, workers ou processamento periódico.
 - O endpoint JSON disponível é somente leitura.
 

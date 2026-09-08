@@ -1,4 +1,5 @@
-from collections.abc import AsyncIterator
+import time
+from collections.abc import AsyncIterator, Awaitable, Callable
 from contextlib import asynccontextmanager
 from datetime import datetime
 from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
@@ -8,6 +9,7 @@ from fastapi import Depends, FastAPI, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from starlette.middleware.sessions import SessionMiddleware
@@ -15,6 +17,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from app.auth import authenticate, current_user, hash_password
 from app.config import settings
 from app.database import create_tables, get_db
+from app.metrics import observe_http_request
 from app.models import Event, Order, User
 
 
@@ -49,6 +52,47 @@ def page_context(
         "current_user": current_user(request, database),
         **extra,
     }
+
+
+def route_template(request: Request) -> str:
+    route = request.scope.get("route")
+    path = getattr(route, "path", None)
+
+    if isinstance(path, str):
+        return path
+
+    return "unmatched"
+
+
+@app.middleware("http")
+async def record_http_metrics(
+    request: Request,
+    call_next: Callable[[Request], Awaitable[Response]],
+) -> Response:
+    if request.url.path == "/metrics":
+        return await call_next(request)
+
+    started_at = time.perf_counter()
+
+    try:
+        response = await call_next(request)
+    except Exception:
+        observe_http_request(
+            method=request.method,
+            route=route_template(request),
+            status_code="500",
+            duration_seconds=time.perf_counter() - started_at,
+        )
+        raise
+
+    observe_http_request(
+        method=request.method,
+        route=route_template(request),
+        status_code=str(response.status_code),
+        duration_seconds=time.perf_counter() - started_at,
+    )
+
+    return response
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -332,3 +376,11 @@ def list_events(
         }
         for event in events
     ]
+
+
+@app.get("/metrics", include_in_schema=False)
+def metrics() -> Response:
+    return Response(
+        content=generate_latest(),
+        media_type=CONTENT_TYPE_LATEST,
+    )
