@@ -2,7 +2,7 @@
   "schema_version": 2,
   "updated_at": "2026-09-05",
   "current_stage": "baseline-v0",
-  "active_challenge": "load-001",
+  "active_challenge": "observability-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -42,7 +42,6 @@
   "tools": {
     "to_cover": [
       "SonarQube",
-      "Locust",
       "Prometheus",
       "Grafana",
       "Loki",
@@ -79,16 +78,17 @@
       "pytest-cov",
       "GitHub Actions",
       "Docker",
-      "systemd"
+      "systemd",
+      "Locust"
     ],
     "well_covered": []
   },
   "next_challenges": [
     {
-      "id": "load-001",
-      "objective": "Medir o baseline de navegação e compra sob os limites do notebook.",
-      "tool": "Locust",
-      "proof": "Duas execuções headless do cenário versionado registram RPS, falhas e percentis por rota."
+      "id": "observability-001",
+      "objective": "Expor métricas HTTP de taxa, status e duração no serviço em execução.",
+      "tool": "prometheus-client",
+      "proof": "Contador e histograma por rota aparecem em /metrics durante carga curta."
     },
     {
       "id": "load-001",

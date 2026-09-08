@@ -13,8 +13,8 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `load-001`, descrito em
-  `docs/studies/challenges/008-notebook-load-baseline/README.md`.
+- Desafio ativo: `observability-001`, descrito em
+  `docs/studies/challenges/009-http-prometheus-metrics/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
@@ -109,8 +109,8 @@ uv run --group typing mypy app
 uv run uvicorn app.main:app --reload
 ```
 
-Ruff, Mypy, cobertura, CI, Docker e systemd foram incorporados. A medição de
-carga no notebook está no desafio ativo.
+Ruff, Mypy, cobertura, CI, Docker, systemd e Locust foram incorporados. As
+métricas HTTP Prometheus estão no desafio ativo.
 
 ## Política de documentação
 
