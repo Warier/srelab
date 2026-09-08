@@ -114,8 +114,8 @@ dois produz diagnóstico enganoso.
 
    ```bash
    docker compose -f observability/compose.yaml config
-   docker compose -f observability/compose.yaml run --rm prometheus \
-     promtool check config /etc/prometheus/prometheus.yml
+   docker compose -f observability/compose.yaml run --rm --entrypoint promtool \
+     prometheus check config /etc/prometheus/prometheus.yml
    ```
 
 4. Inicie e valide saúde:

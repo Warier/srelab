@@ -16,9 +16,11 @@ flowchart LR
     R --> S["SQLAlchemy Session"]
     S --> D[("SQLite: scalepass.db")]
     F --> M["/metrics: prometheus-client"]
+    P["Prometheus no PC principal"] -->|"scrape LAN /metrics"| M
+    G["Grafana no PC principal"] -->|"PromQL"| P
 ```
 
-Não existem serviços externos, jobs em segundo plano ou componentes distribuídos.
+Não há serviços de domínio externos, jobs em segundo plano ou componentes distribuídos.
 
 ### Operação no notebook
 
@@ -42,9 +44,11 @@ build de JavaScript.
 ### Métricas HTTP
 
 O middleware HTTP mede contador e duração por método, template de rota e status.
-`GET /metrics` expõe o formato Prometheus e não mede a si próprio. Ainda não há
-servidor Prometheus, retenção, consulta PromQL, dashboard ou alerta; o endpoint
-é consultado manualmente na rede local.
+`GET /metrics` expõe o formato Prometheus e não mede a si próprio. No PC principal,
+o stack versionado em `observability/` executa Prometheus e Grafana: Prometheus
+consulta o notebook pela LAN a cada cinco segundos e Grafana apresenta o dashboard
+provisionado. Dados do stack ficam em volumes locais; IP do notebook e credenciais
+de Grafana não são versionados. Não há alertas, traces nem logs estruturados.
 
 ### Autenticação
 
@@ -119,7 +123,7 @@ imediatamente um pedido com estado `paid`.
 - Todas as consultas e escritas acontecem de forma síncrona.
 - Catálogo e histórico ainda não possuem paginação.
 - Criação de esquema não mantém histórico de alterações.
-- Existem métricas HTTP locais, mas não há servidor de métricas, traces ou logs
+- Há coleta e dashboard de métricas HTTP; ainda não há alertas, traces ou logs
   estruturados. A imagem possui healthcheck Docker em `/api/events`.
 - Não existem cache, fila, workers ou processamento periódico.
 - O endpoint JSON disponível é somente leitura.

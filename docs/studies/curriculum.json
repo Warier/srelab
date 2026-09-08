@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-09-05",
+  "updated_at": "2026-09-08",
   "current_stage": "baseline-v0",
   "active_challenge": "visualization-001",
   "status_meaning": {
@@ -10,7 +10,7 @@
   },
   "concepts": {
     "to_cover": [
-      "observabilidade, SLI, SLO e error budget",
+      "SLI, SLO e error budget",
       "testes de carga e planejamento de capacidade",
       "concorrência, transações e isolamento",
       "otimização de consultas e modelagem de banco",
@@ -36,15 +36,14 @@
       "análise estática de tipos",
       "cobertura orientada a risco",
       "integração e entrega contínuas",
-      "métricas HTTP com Counter e Histogram"
+      "métricas HTTP com Counter e Histogram",
+      "coleta de métricas e dashboard operacional"
     ],
     "well_covered": []
   },
   "tools": {
     "to_cover": [
       "SonarQube",
-      "Prometheus",
-      "Grafana",
       "Loki",
       "OpenTelemetry",
       "Tempo",
@@ -81,17 +80,13 @@
       "Docker",
       "systemd",
       "Locust",
-      "prometheus-client"
+      "prometheus-client",
+      "Prometheus",
+      "Grafana"
     ],
     "well_covered": []
   },
   "next_challenges": [
-    {
-      "id": "visualization-001",
-      "objective": "Consultar métricas do notebook e visualizar carga em um dashboard reproduzível.",
-      "tool": "Prometheus + Grafana",
-      "proof": "Target fica UP e dashboard provisionado mostra taxa, erros, p95 e rotas durante carga."
-    },
     {
       "id": "database-001",
       "objective": "Reproduzir e depois impedir violação concorrente do estoque.",
