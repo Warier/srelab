@@ -53,6 +53,7 @@ def page_context(
         **extra,
     }
 
+
 def route_template(request: Request) -> str:
     route = request.scope.get("route")
     path = getattr(route, "path", None)
@@ -375,6 +376,7 @@ def list_events(
         }
         for event in events
     ]
+
 
 @app.get("/metrics", include_in_schema=False)
 def metrics() -> Response:

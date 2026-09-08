@@ -14,8 +14,8 @@ projeto.
 | 006 | concluído | Gerar uma imagem executável e reproduzível | Docker | imagem sobe do zero, persiste dados e responde ao smoke test |
 | 007 | concluído | Operar o processo no notebook com limite explícito | systemd + Docker | reinício automático, limites e acesso pela LAN comprovados |
 | 008 | concluído | Medir o comportamento atual sob uma carga definida | Locust | duas rodadas registraram RPS, erros e percentis por rota |
-| 009 | ativo | Expor métricas HTTP essenciais | Prometheus client | taxa, status e duração aparecem em `/metrics` durante carga |
-| 010 | planejado | Visualizar a saúde do serviço durante carga | Prometheus + Grafana | dashboard versionado explica uma degradação observada |
+| 009 | concluído | Expor métricas HTTP essenciais | prometheus-client | taxa, status e duração aparecem em `/metrics` durante carga |
+| 010 | ativo | Visualizar a saúde do serviço durante carga | Prometheus + Grafana | target fica UP e dashboard versionado mostra taxa, erros, p95 e rotas |
 | 011 | planejado | Reproduzir venda incorreta sob concorrência | Pytest/Locust concorrente | teste falha demonstrando perda ou violação de estoque |
 | 012 | planejado | Preservar a invariável de estoque no PostgreSQL | PostgreSQL | teste concorrente passa sem overselling |
 | 013 | planejado | Corrigir uma consulta lenta de catálogo | `EXPLAIN ANALYZE` | plano e p95 melhoram sob dataset fixado |
