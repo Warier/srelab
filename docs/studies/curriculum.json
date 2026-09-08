@@ -2,7 +2,7 @@
   "schema_version": 2,
   "updated_at": "2026-09-08",
   "current_stage": "baseline-v0",
-  "active_challenge": "visualization-001",
+  "active_challenge": "concurrency-001",
   "status_meaning": {
     "to_cover": "Ainda não estudado de forma prática no projeto.",
     "introduced": "Já aparece no projeto, mas sem profundidade ou operação suficiente.",
@@ -88,10 +88,16 @@
   },
   "next_challenges": [
     {
+      "id": "concurrency-001",
+      "objective": "Classificar a colisão de compras concorrentes com um cenário de tentativa única.",
+      "tool": "Locust + SQLite",
+      "proof": "A carga e a inspeção pós-execução distinguem 303, 400, falhas operacionais e a invariável de estoque."
+    },
+    {
       "id": "database-001",
-      "objective": "Reproduzir e depois impedir violação concorrente do estoque.",
+      "objective": "Preservar a invariável de estoque sob concorrência.",
       "tool": "PostgreSQL",
-      "proof": "O teste concorrente passa sem estoque negativo nem overselling."
+      "proof": "O teste concorrente passa sem estoque negativo, overselling ou erro de lock."
     }
   ],
   "completion_rule": "Um item só entra em well_covered depois de evidência prática, trade-offs documentados e uso sério em mais de uma etapa."

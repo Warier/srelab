@@ -16,7 +16,7 @@ projeto.
 | 008 | concluído | Medir o comportamento atual sob uma carga definida | Locust | duas rodadas registraram RPS, erros e percentis por rota |
 | 009 | concluído | Expor métricas HTTP essenciais | prometheus-client | taxa, status e duração aparecem em `/metrics` durante carga |
 | 010 | concluído | Visualizar a saúde do serviço durante carga | Prometheus + Grafana | target fica UP e dashboard versionado mostra taxa, erros, p95 e rotas |
-| 011 | planejado | Reproduzir venda incorreta sob concorrência | Pytest/Locust concorrente | teste falha demonstrando perda ou violação de estoque |
+| 011 | ativo | Reproduzir e classificar colisão de venda concorrente | Locust + SQLite | 50 tentativas têm status e invariável de estoque registrados |
 | 012 | planejado | Preservar a invariável de estoque no PostgreSQL | PostgreSQL | teste concorrente passa sem overselling |
 | 013 | planejado | Corrigir uma consulta lenta de catálogo | `EXPLAIN ANALYZE` | plano e p95 melhoram sob dataset fixado |
 | 014 | planejado | Evitar esgotamento de conexões ao escalar workers | PgBouncer | carga-alvo passa dentro do limite de conexões |
@@ -28,6 +28,9 @@ projeto.
 | 020 | planejado | Conter falha em cascata de uma dependência lenta | Toxiproxy | timeout e recuperação atendem ao SLO definido |
 | 021 | planejado | Reproduzir a dupla escrita não atômica no cadastro | PostgreSQL + Mailpit | matriz de falhas mostra conta sem e-mail e e-mail sem conta |
 | 022 | planejado | Tornar a notificação de cadastro recuperável | outbox transacional + worker | usuário e outbox são atômicos; itens pendentes são entregues após matar o worker |
+| 023 | planejado | Acessar uma VM de laboratório sem expor a aplicação publicamente | Tailscale ou WireGuard | notebook e PC alcançam a VM pelo overlay privado; regras públicas mínimas são verificadas |
+| 024 | planejado | Provisionar uma VM de laboratório de forma descartável | Terraform/OpenTofu + provedor escolhido | `plan`, `apply` e `destroy` deixam inventário, tags e custo esperado verificáveis |
+| 025 | planejado | Aplicar o mesmo release em notebook e VM com diferenças explícitas de ambiente | Ansible | inventário versionado instala e verifica o release em ambos os destinos |
 
 ## Separação dos desafios iniciais
 

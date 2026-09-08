@@ -13,15 +13,15 @@ programa de estudos. Material pedagógico pertence a `docs/studies/`.
 ## Estado atual
 
 - Estágio: `baseline-v0`.
-- Desafio ativo: `visualization-001`, descrito em
-  `docs/studies/challenges/010-prometheus-grafana-dashboard/README.md`.
+- Desafio ativo: `concurrency-001`, descrito em
+  `docs/studies/challenges/011-concurrent-sale-reproduction/README.md`.
 - Runtime: CPython 3.14, gerenciado por `uv`.
 - Aplicação: monólito FastAPI com páginas Jinja2.
 - Persistência: SQLite local por meio do SQLAlchemy.
 - Autenticação: sessão por cookie e hash de senha propositalmente simples.
 - Operação: um processo da aplicação em container, gerenciado por systemd no
-  notebook; CI e métricas HTTP expostas, sem servidor de métricas, traces ou logs
-  estruturados.
+  notebook; CI, métricas HTTP coletadas por Prometheus e dashboard Grafana no PC
+  principal, sem traces ou logs estruturados.
 - Testes automatizados: 15 testes de integração HTTP isolados com Pytest.
 
 Antes de modificar código, leia, nesta ordem:
@@ -72,15 +72,16 @@ simples instalação de uma ferramenta não conclui um aprendizado.
 5. integração contínua com GitHub Actions;
 6. empacotamento e deploy no notebook Arch Linux;
 7. observabilidade mínima e testes de carga;
-8. concorrência na venda e migração para PostgreSQL;
-9. índices, consultas e pool de conexões;
-10. cache e invalidação;
-11. filas, retries, idempotência e outbox;
-12. múltiplas instâncias e balanceamento;
-13. segurança ofensiva e defensiva;
-14. resiliência, SLOs e chaos testing;
-15. CDC, eventos e possível extração seletiva de serviços;
-16. infraestrutura como código e recuperação de desastre.
+8. reprodução e classificação de concorrência na venda;
+9. migração para PostgreSQL e proteção da invariável de estoque;
+10. índices, consultas e pool de conexões;
+11. cache e invalidação;
+12. filas, retries, idempotência e outbox;
+13. múltiplas instâncias e balanceamento;
+14. segurança ofensiva e defensiva;
+15. resiliência, SLOs e chaos testing;
+16. CDC, eventos e possível extração seletiva de serviços;
+17. infraestrutura como código e recuperação de desastre.
 
 Não presuma que o final precisa ser microsserviços. Um monólito modular pode
 continuar sendo a solução correta.
