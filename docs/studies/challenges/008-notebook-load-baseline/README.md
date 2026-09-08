@@ -58,6 +58,8 @@ Faça login em `on_start` por `POST /login` com formulário `email` e `password`
 Valide os status com `catch_response=True`; redirecionamentos não devem ser
 seguidos nas requisições POST, pois o cenário mede a rota que tomou a decisão.
 Use espera entre 0,5 e 1,5 segundos para evitar um loop artificial sem pausa.
+Nomeie também o login como `POST /login` no relatório, mas não o inclua na mistura
+ponderada: ele ocorre uma vez por usuário virtual.
 
 ## Instalação e validação local
 
